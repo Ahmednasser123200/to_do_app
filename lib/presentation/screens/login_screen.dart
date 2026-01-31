@@ -9,8 +9,6 @@ import '../widgets/textfield/sign_textfield.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
-  final passwordController = TextEditingController();
-  final emailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
