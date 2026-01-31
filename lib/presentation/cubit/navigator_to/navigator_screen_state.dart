@@ -17,3 +17,7 @@ final class NavigatorToLoginScreenState extends NavigatorScreenState {
 final class NavigatorToHomeScreenState extends NavigatorScreenState {
   const NavigatorToHomeScreenState();
 }
+
+final class NavigatorTosignUpScreenState extends NavigatorScreenState {
+  const NavigatorTosignUpScreenState();
+}

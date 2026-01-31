@@ -42,4 +42,34 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
       emit(AuthenticationError("Something went wrong"));
     }
   }
+ Future<void> signIn({
+    required String emailAddress,
+    required String password,
+  }) async {
+    if (emailAddress.isEmpty || password.isEmpty) {
+      emit(AuthenticationError("All fields are required"));
+      return;
+    }
+
+    emit(AuthenticationLoading());
+
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailAddress,
+        password: password,
+      );
+
+      emit(AuthenticationSuccess());
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        emit(AuthenticationError("No user found for that email"));
+      } else if (e.code == 'wrong-password') {
+        emit(AuthenticationError("Wrong password provided"));
+      } else {
+        emit(AuthenticationError(e.message ?? "Auth error"));
+      }
+    } catch (e) {
+      emit(AuthenticationError("Something went wrong"));
+    }
+  }
 }
